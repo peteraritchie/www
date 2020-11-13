@@ -597,10 +597,10 @@
                 }]
               ;
 		d3.json("graph-data.json", function(err, treeData) {
-			        if (!err) {
+			        if (err) {
             console.log(treeData);
 
-        }
+        } else {
 				var window = d3.select("window");
 				var cw = window.innerWidth;
 				var ch = window.innerHeight;
@@ -746,7 +746,7 @@
         update(d);
 
       }
-		});
+	}});
 	</script>
 
 </body>

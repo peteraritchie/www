@@ -3,9 +3,745 @@
   <head>
     <meta charset="utf-8">
     <title>New File</title>
-  </head>
+	<style>
+		.node {
+			cursor: pointer;
+		}
 
-  <body>
-    <div>coming soon...</div>
+		.node circle {
+			fill: #fff;
+			stroke: steelblue;
+			stroke-width: 3px;
+		}
+
+		.node text {
+			font: 15px sans-serif;
+		}
+
+		.link {
+			fill: none;
+			stroke: #ccc;
+			stroke-width: 2px;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- load the d3.js library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+
+	<script>
+// TODO: reorg OAS to match this tree
+            var treeData =
+              [
+                {
+                  "name": "Rocket API",
+                  "children": [
+                    {
+                      "name": "Me",
+                      "children": [
+                        {
+                          "name": "On",
+                          "children": [
+                            {
+                              "name": "An",
+                              "children": [
+                                {
+                                  "name": "Co",
+                                  "_children": [
+                                    {
+                                      "name": "Oo",
+                                      "_children": [
+                                        {
+                                          "name": "Oe"
+                                        },
+                                        {
+                                          "name": "Os"
+                                        },
+                                        {
+                                          "name": "Te"
+                                        },
+                                        {
+                                          "name": "Or"
+                                        },
+                                        {
+                                          "name": "Or"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "Oo",
+                                      "_children": [
+                                        {
+                                          "name": "Nr"
+                                        },
+                                        {
+                                          "name": "Or"
+                                        },
+                                        {
+                                          "name": "Fe"
+                                        },
+                                        {
+                                          "name": "Le"
+                                        },
+                                        {
+                                          "name": "El"
+                                        },
+                                        {
+                                          "name": "Pe"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "Co"
+                                    },
+                                    {
+                                      "name": "Or"
+                                    },
+                                    {
+                                      "name": "Se"
+                                    },
+                                    {
+                                      "name": "Ar"
+                                    },
+                                    {
+                                      "name": "Oe"
+                                    },
+                                    {
+                                      "name": "Ar"
+                                    },
+                                    {
+                                      "name": "Le"
+                                    },
+                                  ]
+                                },
+                                {
+                                  "name": "As",
+                                  "_children": [
+                                    {
+                                      "name": "Applicant[]",
+                                      "_children": [
+                                        {
+                                          "name": "So",
+                                          "_children": [
+                                            {
+                                              "name": "Is"
+                                            },
+                                            {
+                                              "name": "Ee"
+                                            },
+                                            {
+                                              "name": "Mr"
+                                            },
+                                            {
+                                              "name": "Ie"
+                                            },
+                                            {
+                                              "name": "Vo",
+                                              "_children": [
+                                                {
+                                                  "name": "Ft"
+                                                },
+                                                {
+                                                  "name": "St"
+                                                },
+                                                {
+                                                  "name": "Lt"
+                                                },
+                                                {
+                                                  "name": "St"
+                                                },
+                                                {
+                                                  "name": "Pt"
+                                                },
+                                                {
+                                                  "name": "Pt"
+                                                },
+                                                {
+                                                  "name": "Ct"
+                                                },
+                                                {
+                                                  "name": "Ct"
+                                                }
+                                              ]
+                                            }
+
+                                          ]
+                                        },
+                                        {
+                                          "name": "Ct",
+                                          "_children": [
+                                            {
+                                              "name": "Employment[]",
+                                              "_children": [
+                                                {
+                                                  "name": "Ee"
+                                                },
+                                                {
+                                                  "name": "Pr"
+                                                },
+                                                {
+                                                  "name": "Pn"
+                                                },
+                                                {
+                                                  "name": "En"
+                                                },
+                                                {
+                                                  "name": "Se"
+                                                },
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "Es"
+                                                },
+                                                {
+                                                  "name": "Oo"
+                                                },
+                                                {
+                                                  "name": "Iy"
+                                                },
+                                                {
+                                                  "name": "Ie"
+                                                },
+                                                {
+                                                  "name": "Il"
+                                                },
+                                                {
+                                                  "name": "Id"
+                                                },
+                                                {
+                                                  "name": "Hr"
+                                                },
+                                                {
+                                                  "name": "Ls"
+                                                },
+                                                {
+                                                  "name": "Re"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Ey",
+                                          "_children": [
+                                            {
+                                              "name": "EmploymentInfo[]",
+                                              "_children": [
+                                                {
+                                                  "name": "Ee"
+                                                },
+                                                {
+                                                  "name": "Pr"
+                                                },
+                                                {
+                                                  "name": "Pn"
+                                                },
+                                                {
+                                                  "name": "En"
+                                                },
+                                                {
+                                                  "name": "Se"
+                                                },
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "Es"
+                                                },
+                                                {
+                                                  "name": "Oo"
+                                                },
+                                                {
+                                                  "name": "Iy"
+                                                },
+                                                {
+                                                  "name": "Ie"
+                                                },
+                                                {
+                                                  "name": "Il"
+                                                },
+                                                {
+                                                  "name": "Id"
+                                                },
+                                                {
+                                                  "name": "Hr"
+                                                },
+                                                {
+                                                  "name": "Ls"
+                                                },
+                                                {
+                                                  "name": "Re"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Ry",
+                                          "_children": [
+                                            {
+                                              "name": "ResidencyInfo[]",
+                                              "_children": [
+                                                {
+                                                  "name": "Rr"
+                                                },
+                                                {
+                                                  "name": "Rr"
+                                                },
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "Dn"
+                                                },
+                                                {
+                                                  "name": "Ao"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Ls",
+                                          "_children": [
+                                            {
+                                              "name": "LiabilityInfo[]",
+                                              "_children": [
+                                                {
+                                                  "name": "Tr"
+                                                },
+                                                {
+                                                  "name": "At"
+                                                },
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "Bt"
+                                                },
+                                                {
+                                                  "name": "Cr"
+                                                },
+                                                {
+                                                  "name": "Wg"
+                                                },
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "De"
+                                                },
+                                                {
+                                                  "name": "Id"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Es",
+                                          "_children": [
+                                            {
+                                              "name": "ExpenseInfo[]",
+                                              "_children": [
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "Tr"
+                                                },
+                                                {
+                                                  "name": "Mt"
+                                                },
+                                                {
+                                                  "name": "Cr"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "As",
+                                          "_children": [
+                                            {
+                                              "name": "Ao",
+                                              "_children": [
+                                                {
+                                                  "name": "At"
+                                                },
+                                                {
+                                                  "name": "Tr"
+                                                },
+                                                {
+                                                  "name": "Fe"
+                                                },
+                                                {
+                                                  "name": "Ct"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Is",
+                                          "_children": [
+                                            {
+                                              "name": "Io",
+                                              "_children": [
+                                                {
+                                                  "name": "Tr"
+                                                },
+                                                {
+                                                  "name": "Me"
+                                                }
+                                              ]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Os",
+                                          "_children": [
+                                            {
+                                              "name": "MortgageOutline[]",
+                                              "_children": [
+                                                {
+                                                  "name": "Me",
+                                                  "_children": [
+                                                    {
+                                                      "name": "Cr"
+                                                    },
+                                                    {
+                                                      "name": "Lr"
+                                                    },
+                                                    {
+                                                      "name": "Mt"
+                                                    },
+                                                    {
+                                                      "name": "Lt"
+                                                    },
+                                                    {
+                                                      "name": "Fr"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "name": "HC",
+                                                  "_children": [
+                                                    {
+                                                      "name": "Ct"
+                                                    }
+                                                  ]
+                                                }]
+                                            }]
+                                        },
+                                        {
+                                          "name": "Ir"
+                                        },
+                                        {
+                                          "name": "Ne"
+                                        },
+                                        {
+                                          "name": "Cs"
+                                        },
+                                        {
+                                          "name": "Be"
+                                        },
+                                        {
+                                          "name": "Ae"
+                                        },
+                                        {
+                                          "name": "Dr"
+                                        },
+                                        {
+                                          "name": "Dr"
+                                        },
+                                        {
+                                          "name": "It"
+                                        },
+                                        {
+                                          "name": "Ds"
+                                        },
+                                        ]
+                                    }]
+                                },
+                                {
+                                  "name": "Lo",
+                                  "_children": [
+                                    {
+                                      "name": "Et"
+                                    },
+                                    {
+                                      "name": "Ms"
+                                    },
+                                    {
+                                      "name": "Mn"
+                                    },
+                                    {
+                                      "name": "Ds"
+                                    },
+                                    {
+                                      "name": "Gs"
+                                    },
+                                    {
+                                      "name": "Et"
+                                    },
+                                    {
+                                      "name": "Pt"
+                                    },
+                                    {
+                                      "name": "Cr"
+                                    },
+                                    {
+                                      "name": "Cr"
+                                    },
+                                    {
+                                      "name": "Ht"
+                                    },
+                                    {
+                                      "name": "Pt"
+                                    },
+                                    {
+                                      "name": "Mt"
+                                    },
+                                    {
+                                      "name": "Is"
+                                    },
+                                    {
+                                      "name": "Ht"
+                                    },
+                                    {
+                                      "name": "Dn"
+                                    },
+                                    {
+                                      "name": "Cs",
+                                      "_children": [
+                                        {
+                                          "name": "ClosingAdjustment[]",
+                                          "_children": [
+                                            {
+                                              "name": "Cr"
+                                            },
+                                            {
+                                              "name": "Ct"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Do",
+                                  "_children": [
+                                    {
+                                      "name": "Ee"
+                                    },
+                                    {
+                                      "name": "Mo"
+                                    },
+                                    {
+                                      "name": "Fo"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Do",
+                                  "_children": [
+                                    {
+                                      "name": "Wd"
+                                    },
+                                    {
+                                      "name": "Ar"
+                                    },
+                                    {
+                                      "name": "Eo"
+                                    },
+                                    {
+                                      "name": "Go"
+                                    },
+                                    {
+                                      "name": "Ro"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Le"
+                                }
+                              ]
+                            }]
+                        },
+                        {
+                          "name": "Sg"
+                        },
+                        {
+                          "name": "Ps"
+                        },
+                        {
+                          "name": "Qn"
+                        }
+                      ]
+                    }
+                    , {
+                      "name": "Ct",
+                      "_children" : [
+                        {
+                          "name" : "An",
+                          "_children" : [
+                          {"name":"Pre-approvalLetter"}
+                        ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Py"
+                    },
+                    {
+                      "name": "As"
+                    },
+                  ]
+                }]
+              ;
+				var window = d3.select("window");
+				var cw = window.innerWidth;
+				var ch = window.innerHeight;
+		// ************** Generate the tree diagram	 *****************
+		var margin = { top: 20, right: 120, bottom: 20, left: 120 },
+			width = cw - margin.right - margin.left,
+			height = ch - margin.top - margin.bottom;
+
+		var i = 0,
+			duration = 600,
+			root;
+
+		var tree = d3.layout.tree()
+			.size([height, width]);
+
+		var diagonal = d3.svg.diagonal()
+			.projection(function (d) { return [d.y, d.x]; });
+
+		var svg = d3.select("body").append("svg")
+			.attr("width", width + margin.right + margin.left)
+			.attr("height", height + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		root = treeData[0];
+		root.x0 = height / 2;
+		root.y0 = 0;
+
+		update(root);
+
+		d3.select(self.frameElement).style("height", "500px");
+
+		function update(source) {
+
+			// Compute the new tree layout.
+			var nodes = tree.nodes(root).reverse(),
+				links = tree.links(nodes);
+
+			// Normalize for fixed-depth.
+			nodes.forEach(function (d) { d.y = d.depth * 45 + (d.depth * 90);});
+
+			// Update the nodes…
+			var node = svg.selectAll("g.node")
+				.data(nodes, function (d) { return d.id || (d.id = ++i); });
+
+			// Enter any new nodes at the parent's previous position.
+			var nodeEnter = node.enter().append("g")
+				.attr("class", "node")
+				.attr("transform", function (d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+				.on("click", click);
+
+			nodeEnter.append("circle")
+				.attr("r", 1e-6)
+				.style("fill", function (d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+			nodeEnter.append("text")
+				.attr("x", function (d) { return d.children || d._children ? -13 : 13; })
+				.attr("dy", "-.35em")
+				.attr("text-anchor", function (d) { return d.children || d._children ? "end" : "start"; })
+				.text(function (d) { return d.name; })
+				.style("fill-opacity", 1e-6);
+
+			// Transition nodes to their new position.
+			var nodeUpdate = node.transition()
+				.duration(duration)
+				.attr("transform", function (d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+			nodeUpdate.select("circle")
+				.attr("r", 10)
+				.style("fill", function (d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+			nodeUpdate.select("text")
+				.style("fill-opacity", 1);
+
+			// Transition exiting nodes to the parent's new position.
+			var nodeExit = node.exit().transition()
+				.duration(duration)
+				.attr("transform", function (d) { return "translate(" + source.y + "," + source.x + ")"; })
+				.remove();
+
+			nodeExit.select("circle")
+				.attr("r", 1e-6);
+
+			nodeExit.select("text")
+				.style("fill-opacity", 1e-6);
+
+			// Update the links…
+			var link = svg.selectAll("path.link")
+				.data(links, function (d) { return d.target.id; });
+
+			// Enter any new links at the parent's previous position.
+			link.enter().insert("path", "g")
+				.attr("class", "link")
+				.attr("d", function (d) {
+					var o = { x: source.x0, y: source.y0 };
+					return diagonal({ source: o, target: o });
+				});
+
+			// Transition links to their new position.
+			link.transition()
+				.duration(duration)
+				.attr("d", diagonal);
+
+			// Transition exiting nodes to the parent's new position.
+			link.exit().transition()
+				.duration(duration)
+				.attr("d", function (d) {
+					var o = { x: source.x, y: source.y };
+					return diagonal({ source: o, target: o });
+				})
+				.remove();
+
+			// Stash the old positions for transition.
+			nodes.forEach(function (d) {
+				d.x0 = d.x;
+				d.y0 = d.y;
+			});
+		}
+
+      // Toggle children on click.
+      function click(d) {
+        if (d.parent) {
+          if (d.parent.children) {
+            let cc = d.parent.children.length;
+            if (cc > 4) {
+              console.info(cc);
+              d.parent.children.forEach(function (c) {
+                if (c != d && c.children) toggleNode(c);
+              });
+            }
+          }
+        }
+        toggleNode(d)
+      }
+      function toggleNode(d) {
+        if (d.children) {
+          d._children = d.children;
+          d.children = null;
+        } else {
+          d.children = d._children;
+          d._children = null;
+        }
+        update(d);
+
+      }
+	</script>
+
   </body>
 </html>

@@ -608,7 +608,7 @@
 			duration = 600,
 			root;
 
-		var tree = d3.layout.tree()
+		var tree = d3.layout.hierarchy()
 			.size([height, width]);
 
 		var diagonal = d3.svg.diagonal()

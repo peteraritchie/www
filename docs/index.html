@@ -596,6 +596,7 @@
                   ]
                 }]
               ;
+		d3.json("graph-data.json", function(treeData) {
 				var window = d3.select("window");
 				var cw = window.innerWidth;
 				var ch = window.innerHeight;
@@ -741,6 +742,7 @@
         update(d);
 
       }
+		});
 	</script>
 
 </body>

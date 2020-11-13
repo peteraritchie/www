@@ -31,15 +31,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 
 	<script>
-
+				var window = d3.select("window");
+				var cw = window.innerWidth;
+				var ch = window.innerHeight;
 		d3.json("graph-data.json", function(err, treeData) {
 			        if (err) {
             console.log(treeData);
 
         } else {
-				var window = d3.select("window");
-				var cw = window.innerWidth;
-				var ch = window.innerHeight;
 		// ************** Generate the tree diagram	 *****************
 		var margin = { top: 20, right: 120, bottom: 20, left: 120 },
 			width = cw - margin.right - margin.left,
